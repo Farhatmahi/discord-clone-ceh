@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createAccount } from "../../firebase";
 import tw from "tailwind-styled-components/dist/tailwind";
@@ -14,6 +14,15 @@ export default function RegistrationForm() {
   const countryRef = useRef<HTMLSelectElement>(null);
   const roleRef = useRef<HTMLSelectElement>(null);
   const [showForm, setShowForm] = useState(false);
+  const sitekey = process.env.NEXT_PUBLIC_SITE_KEY;
+
+  useEffect(() => {
+    if (!sitekey) {
+      console.error("Site key is not defined in the environment variables.");
+      return;
+    }
+    console.log(captchaRef.current);
+  }, [sitekey]);
 
   // console.log(emailRef.current?.value)
 
@@ -89,11 +98,9 @@ export default function RegistrationForm() {
 
             <EmailInput ref={emailRef} type="email" required id="emailInput" />
           </EmailField>
-          <ReCAPTCHA
-            ref={captchaRef}
-            sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
-            className="mb-4"
-          />
+          {sitekey && (
+            <ReCAPTCHA ref={captchaRef} sitekey={sitekey} className="mb-4" />
+          )}
 
           <ContinueButton
             onClick={handleSubmitEmail}
