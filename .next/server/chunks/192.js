@@ -384,24 +384,7 @@ const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebase
 const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)();
 const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)();
 const user = auth.currentUser;
-
-// const firestore = firebase.firestore();
-// server config
-const servers = {
-    iceServers: [
-        {
-            urls: [
-                "stun:stun1.l.google.com:19302",
-                "stun:stun2.l.google.com:19302"
-            ]
-        }, 
-    ],
-    iceCandidatePoolSize: 10
-};
-// global states
-const pc = new RTCPeerConnection(servers);
-let localStream = null;
-let remoteStream = null;
+ // export const analytics = getAnalytics(app);
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } });
